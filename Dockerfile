@@ -13,11 +13,11 @@ RUN echo $JAVA_HOME
 RUN cd /usr/lib/jvm/java-11-amazon-corretto/lib/security
 RUN keytool -import -trustcacerts -alias zscaler -file /files/zscaler.crt -keystore cacerts -storepass changeit -noprompt
 
-# COPY . /build
-# RUN cd /build && \
-#     ./gradlew --no-daemon shadowJar && \
-#     cp build/libs/BuildMe-all.jar /BuildMe-all.jar && \
-#     cd / && \
-#     rm -rf /build
+COPY . /build
+RUN cd /build && \
+    ./gradlew --no-daemon shadowJar && \
+    cp build/libs/BuildMe-all.jar /BuildMe-all.jar && \
+    cd / && \
+    rm -rf /build
 
-#ENTRYPOINT ["java", "-jar", "/BuildMe-all.jar"]
+ENTRYPOINT ["java", "-jar", "/BuildMe-all.jar"]
