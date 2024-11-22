@@ -15,7 +15,7 @@ apt-get install java-common
 
 cd /tmp
 DIR_NAME=$(echo $JAVA_VERSION | sed "s,-,.,g")
-curl -o jdk.deb https://corretto.aws/downloads/resources/${DIR_NAME}/java-11-amazon-corretto-jdk_${JAVA_VERSION}_amd64.deb
+curl -o jdk.deb https://corretto.aws/downloads/resources/${DIR_NAME}/java-11-amazon-corretto-jdk_${JAVA_VERSION}_arm64.deb
 dpkg --install jdk.deb
 rm -f jdk.deb
 apt-get clean
