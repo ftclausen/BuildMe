@@ -8,10 +8,10 @@ RUN /usr/sbin/update-ca-certificates
 COPY ./files/install_java.sh install_java.sh
 RUN ./install_java.sh
 
+ENV JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto
+RUN export JAVA_HOME
 RUN echo $JAVA_HOME
-#RUN export JAVA_HOME = "/usr/lib/jvm/java-11-amazon-corretto"
-RUN cd /usr/lib/jvm/java-11-amazon-corretto/lib/security
-RUN keytool -import -trustcacerts -alias zscaler -file /files/zscaler.crt -keystore cacerts -storepass changeit -noprompt
+RUN keytool -import -trustcacerts -alias zscaler -file /files/zscaler.crt -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
 
 COPY . /build
 RUN cd /build && \
